@@ -11,7 +11,7 @@ console.log(linearSearch(["Olma", "Anor", "Gilos"], "Gilos")); // Siz qidirgan n
 console.log(linearSearch(["Olma", "Anor", "Gilos"], "Tarvuz")); // Bunday narsa yo'q 
 
 // Binary Search
-function binarySearch(arr, target, left = 0; right = arr.length - 1) {
+function binarySearch(arr, target, left = 0, right = arr.length - 1) {
     if (left > right) {
         return "Bunday narsa yo'q"
     }
