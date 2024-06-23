@@ -1,4 +1,4 @@
-// Stack LIFO in class
+// Stack LIFO ( Last In First Out) in class
 class Stack {
     constructor() {
         this.items = []
@@ -69,3 +69,41 @@ browserHistory.visit("www.youtube.com") // Visited: www.youtube.com
 browserHistory.visit("Video 1") // Visited: Video 1
 browserHistory.back() // Returned Page: // www.youtube.com
 console.log(browserHistory.currentPage) // www.youtube.com
+
+// Queue FIFO ( First In First Out ) in class
+class Queue {
+    constructor() {
+        this.result = []
+    }
+    enqueue(element) {
+        this.result.push(element)
+    }
+    deQueue() {
+        if (this.isEmpty()) {
+            return "Queue is empty"
+        }
+        return this.result.shift()
+    }
+    front() {
+        if (this.isEmpty()) {
+            return "Queue is empty"
+        }
+        return this.result[0]
+    }
+    isEmpty() {
+        return this.result.length === 0
+    }
+    size() {
+        return this.result.length
+    }
+    clear() {
+        return this.result = []
+    }
+}
+
+let queue = new Queue()
+queue.enqueue("Welcome to my channel")
+queue.enqueue("Welcome to my page")
+queue.enqueue("Welcome to my blog")
+queue.deQueue()
+queue.front() // Welcome to my page 
