@@ -107,3 +107,26 @@ queue.enqueue("Welcome to my page")
 queue.enqueue("Welcome to my blog")
 queue.deQueue()
 queue.front() // Welcome to my page 
+
+// Live Chat Queue
+class ChatQueue extends Queue {
+    constructor() {
+        super()
+    }
+    addMessage(user, message) {
+        const time = new Date().toLocaleTimeString()
+        this.enqueue({ user, message, time })
+    }
+    dispayeChat() {
+        while (!this.isEmpty()) {
+            const { user, time, message } = this.deQueue()
+            console.log(`[${time}] ${user}: ${message}`);
+        }
+    }
+}
+
+let chat = new ChatQueue()
+chat.addMessage("Albert", "Hello my friend")
+chat.addMessage("Jessica", "How are you")
+chat.addMessage("Tomas", "Nice to meet you")
+chat.dispayeChat()
