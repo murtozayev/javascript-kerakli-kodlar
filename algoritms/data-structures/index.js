@@ -39,3 +39,33 @@ stack.pop() //10, 100
 stack.peek() // 100
 stack.size() // 2
 stack.isEmpty() // false
+
+// Stack LIFO Browser History function
+class BrowserHistory {
+    constructor() {
+        this.history = []
+        this.currentPage = null
+    }
+    visit(page) {
+        if (this.currentPage) {
+            this.history.push(this.currentPage)
+        }
+        this.currentPage = page
+        console.log(`Visited: ${page}`);
+    }
+    back() {
+        if (this.history.length > 0) {
+            this.currentPage = this.history.pop()
+            console.log(`Returned page: ${this.currentPage}`);
+        } else {
+            console.log("There is no page for back");
+        }
+    }
+}
+
+let browserHistory = new BrowserHistory()
+browserHistory.visit("www.google.com") // Visited: www.google.com 
+browserHistory.visit("www.youtube.com") // Visited: www.youtube.com
+browserHistory.visit("Video 1") // Visited: Video 1
+browserHistory.back() // Returned Page: // www.youtube.com
+console.log(browserHistory.currentPage) // www.youtube.com
