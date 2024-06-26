@@ -130,3 +130,65 @@ chat.addMessage("Albert", "Hello my friend")
 chat.addMessage("Jessica", "How are you")
 chat.addMessage("Tomas", "Nice to meet you")
 chat.dispayeChat()
+
+// Hash table in class
+
+class HashTable {
+    constructor(size = 50) {
+        this.table = new Array(size)
+        this.size = size
+    }
+    _hash(key) {
+        let hash = 0
+        for (let i = 0; i < key; i++) {
+            hash = (hash + key.charCodeAt(i) * i) / this.size
+        }
+        return hash
+    }
+    set(key, value) {
+        let index = this._hash(key)
+        if (!this.table[index]) {
+            this.table[index] = []
+        }
+        return this.table[index].push([key, value])
+    }
+    get(key) {
+        let index = this._hash(key)
+        if (this.table[index]) {
+            for (let i = 0; i < this.table[index].length; i++) {
+                if (this.table[index][i][0] === key) {
+                    return this.table[index][i][1]
+                }
+            }
+        }
+        return undefined
+    }
+    remove(key) {
+        let index = this._hash(key)
+        if (this.table[index]) {
+            for (let i = 0; i < this.table.length; i++) {
+                if (this.table[index][i][0] === key) {
+                    this.table[index].splice(i, 1)
+                    return true
+                }
+            }
+            return false
+        }
+    }
+    display() {
+        for (let i = 0; i < this.size; i++) {
+            if (this.table[i]) {
+                console.log(i, this.table[i]);
+            }
+        }
+    }
+}
+
+let hash = new HashTable()
+hash.set("number", 10)
+hash.set("string", "10")
+hash.set("boolean", false)
+hash.display()
+console.log(hash.get('number'));
+hash.remove("number")
+hash.display()
