@@ -192,3 +192,45 @@ hash.display()
 console.log(hash.get('number'));
 hash.remove("number")
 hash.display()
+
+// SetHandle in Array
+
+class HandleSet {
+    constructor() {
+        this.result = []
+    }
+    add(value) {
+        if (this.result.includes(value)) return
+        this.result.push(value)
+    }
+    delete(value) {
+        if (this.result.includes(value)) {
+            this.result.pop()
+        }
+        return null
+    }
+    has(value) {
+        if (this.result.includes(value)) return true
+        else return false
+    }
+    size() {
+        return this.result.length
+    }
+    clear() {
+        this.result = []
+    }
+}
+
+const set = new HandleSet()
+
+set.add(1)
+set.add(2)
+set.add(3)
+set.add(1) // Doesn't add because 1 already added
+
+set.has(3) // true
+set.has(4) // false
+
+set.delete(2) // Removed
+
+set.clear() // Cleaned
