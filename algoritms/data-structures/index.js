@@ -234,3 +234,11 @@ set.has(4) // false
 set.delete(2) // Removed
 
 set.clear() // Cleaned
+
+// Set
+const setA = new Set([1, 2, 3])
+const setB = new Set([3, 4, 5])
+
+const union = new Set([...setA, ...setB]) // 1, 2, 3, 4, 5
+const intersection = new Set([...setA].filter(x => setB.has(x))) // 3
+const difference = new Set([...setA].filter(x => !set.has(x))) // 1, 2
