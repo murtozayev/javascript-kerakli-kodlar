@@ -242,3 +242,59 @@ const setB = new Set([3, 4, 5])
 const union = new Set([...setA, ...setB]) // 1, 2, 3, 4, 5
 const intersection = new Set([...setA].filter(x => setB.has(x))) // 3
 const difference = new Set([...setA].filter(x => !set.has(x))) // 1, 2
+
+// BST ( Binary Search Tree )
+
+class Node {
+    constructor(value) {
+        this.value = value
+        this.left = null
+        this.right = null
+    }
+}
+
+class BinarySearchTree {
+    constructor() {
+        this.root = null
+    }
+    insert(value) {
+        const newNode = new Node(value)
+        if (this.root === null) {
+            this.root = newNode
+        } else {
+            this.insertNode(this.root, newNode)
+        }
+    }
+    insertNode(node, newNode) {
+        if (newNode.value < node.value) {
+            if (node.left === null) {
+                node.left = newNode
+            } else {
+                this.insertNode(node.left, newNode)
+            }
+        } else {
+            if (node.right === null) {
+                node.right = newNode
+            } else {
+                this.insertNode(node.right, newNode)
+            }
+        }
+    }
+    inOrder(node, callback) {
+        if (node !== null) {
+            this.inOrder(node.left, callback)
+            callback(node.value)
+            this.inOrder(node.right, callback)
+        }
+    }
+}
+
+const bst = new BinarySearchTree()
+bst.insert(10)
+bst.insert(30)
+bst.insert(20)
+bst.insert(40)
+bst.insert(60)
+bst.insert(50)
+
+bst.inOrder(bst.root, value => console.log(value))
