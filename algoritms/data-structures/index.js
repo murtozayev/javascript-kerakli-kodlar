@@ -257,103 +257,96 @@ class BinarySearchTree {
     constructor() {
         this.root = null
     }
-}
+    // Insert
+    _insert(value) {
+        const node = new Node(value)
 
-// Insert BST
+        if (this.root === null) {
+            this.root = node
+            return this
+        }
 
-BinarySearchTree.prototype._insert = function (value) {
-    const node = new Node(value)
-
-    if (this.root === null) {
-        this.root = node
-        return this
-    }
-
-    let current = this.root
-    while (true) {
-        if (value < current.value) {
-            if (current.left === null) {
-                current.left = node
-                return this
+        let current = this.root
+        while (true) {
+            if (value < current.value) {
+                if (current.left === null) {
+                    current.left = node
+                    return this
+                }
+                current = current.left
+            } else {
+                if (current.right === null) {
+                    current.right = node
+                    return this
+                }
+                current = current.right
             }
-            current = current.left
-        } else {
-            if (current.right === null) {
-                current.right = node
-                return this
+        }
+    }
+    // Find
+    _find(value) {
+        if (this.root === null) return false
+
+        let current = this.root
+        let found = false
+
+        while (current && !found) {
+            if (value < current.value) {
+                current = current.left
+            } else if (value > current.value) {
+                current = current.right
+            } else {
+                found = true
             }
-            current = current.right
         }
+        if (!found) return false
+        return true
     }
-}
-
-// Find BST
-
-BinarySearchTree.prototype._find = function (value) {
-    if (this.root === null) return false
-
-    let current = this.root
-    let found = false
-
-    while (current && !found) {
-        if (value < current.value) {
-            current = current.left
-        } else if (value > current.value) {
-            current = current.right
-        } else {
-            found = true
-        }
-    }
-    if (!found) return false
-    return true
-}
-
-BinarySearchTree.prototype._remove = function (value) {
-    const removeNode = (node, value) => {
-        if (node === null) {
-            return null
-        }
-        if (value === node.value) {
-            if (node.left === null && node.right === null) {
+    // Remove
+    _remove(value) {
+        const removeNode = (node, value) => {
+            if (node === null) {
                 return null
             }
-            if (node.left === null) {
-                return node.right
-            }
-            if (node.right === null) {
-                return node.left
-            }
+            if (value === node.value) {
+                if (node.left === null && node.right === null) {
+                    return null
+                }
+                if (node.left === null) {
+                    return node.right
+                }
+                if (node.right === null) {
+                    return node.left
+                }
 
-            let tempNode = this.getMin(node.right)
-            node.value = tempNode.value
-            node.right = removeNode(node.right, tempNode.value)
-            return node
-        } else if (value < node.value) {
-            node.left = removeNode(node.left, value)
-            return node
-        } else {
-            node.right = removeNode(node.right, value)
-            return node
+                let tempNode = this.getMin(node.right)
+                node.value = tempNode.value
+                node.right = removeNode(node.right, tempNode.value)
+                return node
+            } else if (value < node.value) {
+                node.left = removeNode(node.left, value)
+                return node
+            } else {
+                node.right = removeNode(node.right, value)
+                return node
+            }
         }
+        this.root = removeNode(this.root, value)
     }
-    this.root = removeNode(this.root, value)
-}
-
-BinarySearchTree.prototype.getMin = function (node) {
-    while (node.left !== null) {
-        node = node.left
+    getMin(node) {
+        while (node.left !== null) {
+            node = node.left
+        }
+        return node
     }
-    return node
-}
-
-// InOrderTraversal BST
-BinarySearchTree.prototype.inOrderTraversal = function (node, result = []) {
-    if (node !== null) {
-        this.inOrderTraversal(node.left, result)
-        result.push(node.value)
-        this.inOrderTraversal(node.right, result)
+    inOrderTraversal(node, result = []) {
+        if (node !== null) {
+            this.inOrderTraversal(node.left, result)
+            result.push(node.value)
+            this.inOrderTraversal(node.right, result)
+        }
+        return result
     }
-    return result
 }
 
 const bst = new BinarySearchTree()
